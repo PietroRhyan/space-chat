@@ -1,4 +1,4 @@
-import { LogoWithTypography } from "./shared/components/logo-with-typography";
+import { LogoWithTypography } from "ui/logo";
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
   return (
