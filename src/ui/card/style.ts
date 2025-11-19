@@ -17,8 +17,8 @@ export const cardTitleStyle = tv({
   base: 'text-white font-outfit font-semibold',
   variants: {
     size: {
-      sm: 'text-base',
-      lg: 'text-2xl'
+      sm: 'text-base pb-4',
+      lg: 'text-2xl pb-[18px]'
     }
   },
   defaultVariants: {
