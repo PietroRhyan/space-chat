@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
 import { inputStyle } from './style'
@@ -17,7 +17,9 @@ function Input({ className, type, icon, ...props }: InputProps) {
 				{...props}
 			></input>
 
-			{icon && <div className='absolute top-1/2 -translate-y-1/2 right-3'>{icon}</div>}
+			{icon && (
+				<div className='absolute top-1/2 -translate-y-1/2 right-3'>{icon}</div>
+			)}
 		</div>
 	)
 }

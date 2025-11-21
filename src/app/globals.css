@@ -66,12 +66,15 @@
 	--text-md: 15px;
 
 	/* Shadows */
-	--shadow-modal: 0px 0px 8px 0px rgb(0, 0, 0, 0.15), 0px 2px 12px 1px rgb(0, 0, 0, 0.1);
+	--shadow-modal:
+		0px 0px 8px 0px rgb(0, 0, 0, 0.15), 0px 2px 12px 1px rgb(0, 0, 0, 0.1);
 	--shadow-button:
 		0px 1px 4px -1px rgb(0, 0, 0, 0.18), 0px 2px 12px 0px rgb(0, 0, 0, 0.12), 0px 4px 18px 0px
 		rgb(0, 0, 0, 0.8);
-	--shadow-input: 0px -1px 6px 0px rgb(0, 0, 0, 0.18), 0px 2px 12px 0px rgb(0, 0, 0, 0.12);
-	--shadow-popover: 0px 0px 8px -1px rgb(0, 0, 0, 0.2), 0px 0px 12px 1px rgb(0, 0, 0, 0.15);
+	--shadow-input:
+		0px -1px 6px 0px rgb(0, 0, 0, 0.18), 0px 2px 12px 0px rgb(0, 0, 0, 0.12);
+	--shadow-popover:
+		0px 0px 8px -1px rgb(0, 0, 0, 0.2), 0px 0px 12px 1px rgb(0, 0, 0, 0.15);
 
 	/* Shadcn UI Vars */
 	--color-sidebar-ring: var(--sidebar-ring);
@@ -120,10 +123,17 @@ body {
 	--dot-space: 12px;
 
 	background:
-		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%)
+		linear-gradient(
+			90deg,
+			var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+			transparent 1%
+		)
 		center / var(--dot-space) var(--dot-space),
-		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center /
-		var(--dot-space) var(--dot-space),
+		linear-gradient(
+			var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+			transparent 1%
+		)
+		center / var(--dot-space) var(--dot-space),
 		var(--dot-color);
 }
 

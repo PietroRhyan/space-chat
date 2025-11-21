@@ -1,6 +1,10 @@
 import { LogoWithTypography } from 'ui/logo'
 
-export default function AccountLayout({ children }: { children: React.ReactNode }) {
+export default function AccountLayout({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	return (
 		<section className='relative h-screen w-full'>
 			<div className='absolute -z-10 h-full w-full bg-[radial-gradient(#CBD9D8_1px,transparent_2px)] bg-size-[16px_16px]' />

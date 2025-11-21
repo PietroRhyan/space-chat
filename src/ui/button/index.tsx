@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import { buttonStyle } from './style'
 
 interface IButtonProps extends ComponentProps<'button'> {

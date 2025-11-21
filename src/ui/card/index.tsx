@@ -7,7 +7,12 @@ interface ICardProps {
 	children: React.ReactNode
 }
 
-export function Card({ title, size = 'lg', width = 300, children }: ICardProps) {
+export function Card({
+	title,
+	size = 'lg',
+	width = 300,
+	children,
+}: ICardProps) {
 	return (
 		<div className={cardStyle({ size })} style={{ maxWidth: width }}>
 			<h3 className={cardTitleStyle({ size })}>{title}</h3>

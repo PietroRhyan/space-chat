@@ -17,12 +17,19 @@
 		"enabled": true,
 		"indentStyle": "tab",
 		"bracketSpacing": true,
-		"lineWidth": 100
+		"lineWidth": 80
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"a11y": {
+				"noStaticElementInteractions": "off",
+				"useKeyWithClickEvents": "off"
+			},
+			"style": {
+				"useImportType": "on"
+			}
 		}
 	},
 	"javascript": {

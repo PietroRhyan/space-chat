@@ -1,14 +1,13 @@
 'use client'
 
+import Link from 'next/link'
+import { FcGoogle } from 'react-icons/fc'
+import { Card } from 'ui/card'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { useInputVisibility } from '@/ui/input/use-input-visibility'
 import { VisibleInputIcon } from '@/ui/input/visible-input-icon'
 import { Label } from '@/ui/label'
-import Link from 'next/link'
-import { Card } from 'ui/card'
-
-import { FcGoogle } from 'react-icons/fc'
 
 export default function SignIn() {
 	const { isVisible, handleVisibility } = useInputVisibility()
@@ -17,7 +16,8 @@ export default function SignIn() {
 		<Card title='Fazer login' width={480}>
 			<div className='w-full flex flex-col gap-6'>
 				<p>
-					Seja bem-vindo ao SpaceChat! Por favor, insira suas credenciais para acessar sua conta
+					Seja bem-vindo ao SpaceChat! Por favor, insira suas credenciais para
+					acessar sua conta
 				</p>
 
 				<form action='' className='w-full flex flex-col gap-6'>
@@ -40,10 +40,18 @@ export default function SignIn() {
 							minLength={6}
 							placeholder='Digite sua senha'
 							autoComplete='off'
-							icon={<VisibleInputIcon isVisible={isVisible} handleVisibility={handleVisibility} />}
+							icon={
+								<VisibleInputIcon
+									isVisible={isVisible}
+									handleVisibility={handleVisibility}
+								/>
+							}
 						/>
 
-						<Link href='#' className='text-primary underline underline-offset-2 ml-auto'>
+						<Link
+							href='#'
+							className='text-primary underline underline-offset-2 ml-auto'
+						>
 							Esqueci minha senha
 						</Link>
 					</div>
