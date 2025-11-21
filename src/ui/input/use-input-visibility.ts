@@ -1,16 +1,16 @@
 'use client'
 
-import { useState } from "react"
+import { useState } from 'react'
 
 export function useInputVisibility() {
-  const [ isVisible, setIsVisible ] = useState(false)
-  
-  const handleVisibility = () => {
-    setIsVisible(!isVisible)
-  }
+	const [isVisible, setIsVisible] = useState(false)
 
-  return {
-    isVisible, 
-    handleVisibility
-  }
+	const handleVisibility = () => {
+		setIsVisible(!isVisible)
+	}
+
+	return {
+		isVisible,
+		handleVisibility,
+	}
 }
