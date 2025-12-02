@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useActionState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Card } from 'ui/card'
+import type { IActionResponse } from '@/shared/interfaces'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { useInputVisibility } from '@/ui/input/use-input-visibility'
@@ -11,8 +12,8 @@ import { VisibleInputIcon } from '@/ui/input/visible-input-icon'
 import { Label } from '@/ui/label'
 import { signInUser } from './actions/sign-in'
 
-const initialState = {
-	message: '',
+const initialState: IActionResponse = {
+	success: false,
 }
 
 export default function SignIn() {
@@ -36,12 +37,13 @@ export default function SignIn() {
 								id='email'
 								name='email'
 								type='string'
-								minLength={6}
 								placeholder='Digite seu e-mail'
 								autoComplete='off'
 							/>
 							{state?.errors?.email && (
-								<p className='text-xs text-danger' aria-live='polite'>{state?.errors.email}</p>
+								<p className='text-xs text-danger' aria-live='polite'>
+									{state?.errors.email}
+								</p>
 							)}
 						</div>
 
@@ -63,7 +65,13 @@ export default function SignIn() {
 							{state?.errors?.password && (
 								<div className='flex flex-col gap-1'>
 									{state?.errors?.password.map((err) => (
-										<p key={err} className='text-xs text-danger' aria-live='polite'>{err}</p>
+										<p
+											key={err}
+											className='text-xs text-danger'
+											aria-live='polite'
+										>
+											{err}
+										</p>
 									))}
 								</div>
 							)}
@@ -76,7 +84,12 @@ export default function SignIn() {
 						</div>
 
 						<div className='w-full mt-3 flex flex-col gap-6'>
-							<Button title='Realizar login' type='submit' fullWidth isLoading={pending} />
+							<Button
+								title='Realizar login'
+								type='submit'
+								fullWidth
+								isLoading={pending}
+							/>
 
 							<div className='relative w-full flex items-center justify-center'>
 								<div className='h-px w-full bg-neutral-900/20' />
