@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc'
+import { toast } from 'sonner'
 import { Card } from 'ui/card'
+import { getAuthErrorMessage } from '@/shared/enums'
 import type { IActionResponse } from '@/shared/interfaces'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
@@ -20,6 +22,17 @@ export default function SignIn() {
 	const [state, formAction, pending] = useActionState(signInUser, initialState)
 
 	const { isVisible, handleVisibility } = useInputVisibility()
+
+	useEffect(() => {
+		if (!state.success && state.details?.message) {
+			const userMessage = getAuthErrorMessage(state.details.message)
+			toast.error('Credenciais Inválidas', { description: userMessage })
+		}
+
+		if (state.success && state.details?.message) {
+			toast.success('Boa caralhoooo. Você foi logado ')
+		}
+	}, [state])
 
 	return (
 		<div className='flex flex-col gap-2'>

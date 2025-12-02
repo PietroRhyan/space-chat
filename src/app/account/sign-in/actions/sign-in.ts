@@ -1,5 +1,6 @@
 'use server'
 
+import { authClient } from '@/lib/auth-client'
 import type { IActionResponse } from '@/shared/interfaces'
 import { signInSchema } from '../schemas/sign-in'
 
@@ -19,8 +20,27 @@ export async function signInUser(
     }
   }
 
+  const { email, password } = validatedFields.data
+
+  const { data, error } = await authClient.signIn.email({
+    email,
+    password,
+    rememberMe: true,
+  })
+
+  if (error) {
+    return {
+      success: false,
+      details: {
+        message: error.code,
+        status: error.status,
+      },
+    }
+  }
+
   return {
     success: true,
+    data,
     details: {
       message: 'Requisição bem sucedida',
     },
