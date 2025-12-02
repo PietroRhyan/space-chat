@@ -1,38 +1,21 @@
 'use client'
 
 import Link from 'next/link'
-import { useActionState, useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { toast } from 'sonner'
-import { Card } from 'ui/card'
-import { getAuthErrorMessage } from '@/shared/enums'
-import type { IActionResponse } from '@/shared/interfaces'
 import { Button } from '@/ui/button'
+import { Card } from '@/ui/card'
 import { Input } from '@/ui/input'
 import { useInputVisibility } from '@/ui/input/use-input-visibility'
 import { VisibleInputIcon } from '@/ui/input/visible-input-icon'
 import { Label } from '@/ui/label'
-import { signInUser } from './actions/sign-in'
-
-const initialState: IActionResponse = {
-	success: false,
-}
+import { useGoogleProvider } from './hooks/use-google-provider'
+import { useSignIn } from './hooks/use-sign-in'
 
 export default function SignIn() {
-	const [state, formAction, pending] = useActionState(signInUser, initialState)
-
 	const { isVisible, handleVisibility } = useInputVisibility()
 
-	useEffect(() => {
-		if (!state.success && state.details?.message) {
-			const userMessage = getAuthErrorMessage(state.details.message)
-			toast.error('Credenciais Inválidas', { description: userMessage })
-		}
-
-		if (state.success && state.details?.message) {
-			toast.success('Boa caralhoooo. Você foi logado ')
-		}
-	}, [state])
+	const { register, handleSubmit, isLoading, errors, onSubmit } = useSignIn()
+	const { googleAuth, isProviderLoading } = useGoogleProvider()
 
 	return (
 		<div className='flex flex-col gap-2'>
@@ -43,20 +26,22 @@ export default function SignIn() {
 						acessar sua conta
 					</p>
 
-					<form action={formAction} className='w-full flex flex-col gap-6'>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className='w-full flex flex-col gap-6'
+					>
 						<div className='w-full flex flex-col gap-2'>
 							<Label htmlFor='email'>E-mail</Label>
 							<Input
 								id='email'
-								name='email'
+								{...register('email')}
 								type='string'
 								placeholder='Digite seu e-mail'
+								disabled={isLoading}
 								autoComplete='off'
 							/>
-							{state?.errors?.email && (
-								<p className='text-xs text-danger' aria-live='polite'>
-									{state?.errors.email}
-								</p>
+							{errors.email && (
+								<p className='text-danger text-xs'>{errors.email.message}</p>
 							)}
 						</div>
 
@@ -64,9 +49,10 @@ export default function SignIn() {
 							<Label htmlFor='password'>Senha</Label>
 							<Input
 								id='password'
-								name='password'
+								{...register('password')}
 								type={isVisible ? 'text' : 'password'}
 								placeholder='Digite sua senha'
+								disabled={isLoading}
 								autoComplete='off'
 								icon={
 									<VisibleInputIcon
@@ -75,18 +61,8 @@ export default function SignIn() {
 									/>
 								}
 							/>
-							{state?.errors?.password && (
-								<div className='flex flex-col gap-1'>
-									{state?.errors?.password.map((err) => (
-										<p
-											key={err}
-											className='text-xs text-danger'
-											aria-live='polite'
-										>
-											{err}
-										</p>
-									))}
-								</div>
+							{errors.password && (
+								<p className='text-danger text-xs'>{errors.password.message}</p>
 							)}
 							<Link
 								href='#'
@@ -101,7 +77,7 @@ export default function SignIn() {
 								title='Realizar login'
 								type='submit'
 								fullWidth
-								isLoading={pending}
+								isLoading={isLoading}
 							/>
 
 							<div className='relative w-full flex items-center justify-center'>
@@ -117,6 +93,8 @@ export default function SignIn() {
 								leftIcon={<FcGoogle size={24} />}
 								type='button'
 								fullWidth
+								onClick={googleAuth}
+								isLoading={isProviderLoading}
 							/>
 						</div>
 					</form>
