@@ -29,7 +29,7 @@ export function proxy(req: NextRequest) {
     const encodedCallbackUrl = encodeURIComponent(callbackUrl)
 
     return NextResponse.redirect(
-      new URL(`/sign-in?callbackUrl=${encodedCallbackUrl}`, nextUrl),
+      new URL(`/account/sign-in?callbackUrl=${encodedCallbackUrl}`, nextUrl),
     )
   }
 

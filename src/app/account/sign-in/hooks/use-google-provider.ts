@@ -1,19 +1,42 @@
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
-import { env } from '@/@types/env'
+import { toast } from 'sonner'
 import { authClient } from '@/lib/auth-client'
+import { isValidRedirect } from '@/shared/utils/valid-redirect'
 
 export function useGoogleProvider() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const callbackUrl = searchParams.get('callbackUrl')
+
   const [isProviderLoading, setIsProviderLoading] = useState(false)
 
   const googleAuth = async () => {
     setIsProviderLoading(true)
 
-    await authClient.signIn
+    const { error } = await authClient.signIn
       .social({
         provider: 'google',
-        callbackURL: env.NEXT_PUBLIC_CLIENT_URL,
       })
       .finally(() => setIsProviderLoading(false))
+
+    if (error) {
+      toast.error('Credenciais Inválidas', {
+        description:
+          'Ocorreu um erro durante o login social via Google. Por favor, tente novamente',
+      })
+      console.error(error.message)
+      return
+    }
+
+    toast.success('Login realizado com sucesso')
+
+    if (callbackUrl && isValidRedirect(callbackUrl)) {
+      router.push(callbackUrl)
+    } else {
+      router.push('/')
+    }
   }
 
   return {
