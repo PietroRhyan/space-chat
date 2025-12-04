@@ -1,7 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server'
+import { Routes } from './shared/routes'
 
-const publicRoutes = ['/landing']
-const authRoutes = ['/account/sign-in', '/account/sign-on']
+const publicRoutes = [Routes.Landing]
+const authRoutes = [Routes.SignIn, Routes.SignOn]
 
 export function proxy(req: NextRequest) {
   const { nextUrl } = req
@@ -13,7 +14,7 @@ export function proxy(req: NextRequest) {
 
   if (isAuthRoute) {
     if (isAuthenticated) {
-      return NextResponse.redirect(new URL('/', nextUrl))
+      return NextResponse.redirect(new URL(Routes.Home, nextUrl))
     }
 
     return NextResponse.next()
@@ -29,7 +30,7 @@ export function proxy(req: NextRequest) {
     const encodedCallbackUrl = encodeURIComponent(callbackUrl)
 
     return NextResponse.redirect(
-      new URL(`/account/sign-in?callbackUrl=${encodedCallbackUrl}`, nextUrl),
+      new URL(`${Routes.SignIn}?callbackUrl=${encodedCallbackUrl}`, nextUrl),
     )
   }
 

@@ -4,6 +4,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { authClient } from '@/lib/auth-client'
 import { getAuthErrorMessage } from '@/shared/enums'
+import { Routes } from '@/shared/routes'
 import { isValidRedirect } from '@/shared/utils/valid-redirect'
 import { type SignInSchema, signInSchema } from '../schemas/sign-in'
 
@@ -42,7 +43,7 @@ export function useSignIn() {
     if (callbackURL && isValidRedirect(callbackURL)) {
       router.push(callbackURL)
     } else {
-      router.push('/')
+      router.push(Routes.Home)
     }
   }
 

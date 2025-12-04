@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { FcGoogle } from 'react-icons/fc'
+import { Routes } from '@/shared/routes'
 import { Button } from '@/ui/button'
 import { Card } from '@/ui/card'
 import { Input } from '@/ui/input'
@@ -101,7 +102,10 @@ export default function SignIn() {
 				</div>
 			</Card>
 
-			<Link href='#' className='text-primary underline underline-offset-2'>
+			<Link
+				href={Routes.SignOn}
+				className='text-primary underline underline-offset-2'
+			>
 				Não tem uma conta? Criar conta
 			</Link>
 		</div>

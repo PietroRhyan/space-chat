@@ -2,6 +2,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { authClient } from '@/lib/auth-client'
+import { Routes } from '@/shared/routes'
 import { isValidRedirect } from '@/shared/utils/valid-redirect'
 
 export function useGoogleProvider() {
@@ -35,7 +36,7 @@ export function useGoogleProvider() {
     if (callbackUrl && isValidRedirect(callbackUrl)) {
       router.push(callbackUrl)
     } else {
-      router.push('/')
+      router.push(Routes.Home)
     }
   }
 
