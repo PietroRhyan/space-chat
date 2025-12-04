@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { FcGoogle } from 'react-icons/fc'
-import { Routes } from '@/shared/routes'
 import { Button } from '@/ui/button'
 import { Card } from '@/ui/card'
 import { Input } from '@/ui/input'
@@ -15,7 +14,7 @@ import { useSignIn } from './hooks/use-sign-in'
 export default function SignIn() {
 	const { isVisible, handleVisibility } = useInputVisibility()
 
-	const { register, handleSubmit, isLoading, errors, onSubmit } = useSignIn()
+	const { register, handleSubmit, isLoading, errors, onSubmit, signOnRoute } = useSignIn()
 	const { googleAuth, isProviderLoading } = useGoogleProvider()
 
 	return (
@@ -103,7 +102,7 @@ export default function SignIn() {
 			</Card>
 
 			<Link
-				href={Routes.SignOn}
+				href={signOnRoute()}
 				className='text-primary underline underline-offset-2'
 			>
 				Não tem uma conta? Criar conta

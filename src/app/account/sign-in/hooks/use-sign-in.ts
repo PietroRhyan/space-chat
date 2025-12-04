@@ -47,9 +47,18 @@ export function useSignIn() {
     }
   }
 
+  const signOnRoute = () => {
+    if (callbackURL && isValidRedirect(callbackURL)) {
+      return `${Routes.SignOn}?callbackUrl=${callbackURL}`
+    } else {
+      return `${Routes.SignOn}`
+    }
+  }
+
   return {
     register,
     handleSubmit,
+    signOnRoute,
     isLoading: isSubmitting,
     onSubmit,
     errors,
