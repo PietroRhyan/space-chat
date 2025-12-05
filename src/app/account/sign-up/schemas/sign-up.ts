@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const signOnSchema = z.object({
+export const signUpSchema = z.object({
   name: z.string()
     .min(3, 'Deve conter no mínimo 3 caracteres')
     .max(80, 'Deve conter no máximo 80 caracteres')
@@ -13,4 +13,4 @@ export const signOnSchema = z.object({
     .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W_]+$/, 'Precisa conter uma letra e um número')
 })
 
-export type SignOnSchema = z.infer<typeof signOnSchema>
+export type SignUpSchema = z.infer<typeof signUpSchema>

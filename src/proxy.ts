@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { Routes } from './shared/routes'
 
 const publicRoutes = [Routes.Landing]
-const authRoutes = [Routes.SignIn, Routes.SignOn]
+const authRoutes = [Routes.SignIn, Routes.SignUp]
 
 export function proxy(req: NextRequest) {
   const { nextUrl } = req

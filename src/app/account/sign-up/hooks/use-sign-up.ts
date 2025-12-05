@@ -6,9 +6,9 @@ import { authClient } from '@/lib/auth-client'
 import { getAuthErrorMessage } from '@/shared/enums'
 import { Routes } from '@/shared/routes'
 import { isValidRedirect } from '@/shared/utils/valid-redirect'
-import { type SignOnSchema, signOnSchema } from '../schemas/sign-on'
+import { type SignUpSchema, signUpSchema } from '../schemas/sign-up'
 
-export function useSignOn() {
+export function useSignUp() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -18,11 +18,11 @@ export function useSignOn() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignOnSchema>({
-    resolver: zodResolver(signOnSchema),
+  } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
   })
 
-  const onSubmit: SubmitHandler<SignOnSchema> = async ({
+  const onSubmit: SubmitHandler<SignUpSchema> = async ({
     name,
     email,
     password,

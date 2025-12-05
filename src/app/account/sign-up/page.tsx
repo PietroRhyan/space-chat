@@ -7,12 +7,12 @@ import { Card } from '@/ui/card'
 import { Input } from '@/ui/input'
 import { useInputVisibility } from '@/ui/input/use-input-visibility'
 import { VisibleInputIcon } from '@/ui/input/visible-input-icon'
-import { useSignOn } from './hooks/use-sign-on'
+import { useSignUp } from './hooks/use-sign-up'
 
-export default function SignOn() {
+export default function SignUp() {
   const { handleVisibility, isVisible } = useInputVisibility()
 
-  const { register, handleSubmit, onSubmit, isLoading, errors, signInRoute } = useSignOn()
+  const { register, handleSubmit, onSubmit, isLoading, errors, signInRoute } = useSignUp()
 
   return (
     <div className='flex flex-col gap-2'>
