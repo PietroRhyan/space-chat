@@ -1,6 +1,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { env } from '@/@types/env'
 import { authClient } from '@/lib/auth-client'
 import { Routes } from '@/shared/routes'
 import { isValidRedirect } from '@/shared/utils/valid-redirect'
@@ -19,6 +20,7 @@ export function useGoogleProvider() {
     const { error } = await authClient.signIn
       .social({
         provider: 'google',
+        callbackURL: env.NEXT_PUBLIC_CLIENT_URL,
       })
       .finally(() => setIsProviderLoading(false))
 
